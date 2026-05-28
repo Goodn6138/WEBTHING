@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Height & Weight Monitor</title>
 
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .value {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Height & Weight</h1>
+
+    <div class="value">
+      Height: <span id="height">--</span> cm
+    </div>
+
+    <div class="value">
+      Weight: <span id="weight">--</span> kg
+    </div>
+  </div>
+
+  <script>
+    async function loadData() {
+      const res = await fetch("/data");
+      const data = await res.json();
+
+      document.getElementById("height").innerText = data.height;
+      document.getElementById("weight").innerText = data.weight;
+    }
+
+    setInterval(loadData, 1000);
+    loadData();
+  </script>
+
+</body>
+</html>
